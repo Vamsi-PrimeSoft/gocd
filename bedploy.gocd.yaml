@@ -1,0 +1,38 @@
+pipelines:
+  - name: BE-CD-YAML
+    group: defaultGroup
+    label_template: "${COUNT}"
+    materials:
+      - git:
+          url: "https://github.com/Vamsi-PrimeSoft/gocd.git"
+          branch: "main"
+    stages:
+
+      - name: environment-connectivity-test
+        jobs:
+          - name: connectivity-test
+            tasks:
+              - bash: cat /etc/os-release
+              - bash: hostname
+
+        - name: Ensure necessary folders are created and owned by ubuntu
+        jobs:
+          - name: Create necessary folders
+            tasks:
+              file:
+                path: "{{ item }}"
+                state: directory
+                owner: ubuntu
+                group: ubuntu
+              loop:
+                - /home/ubuntu/archive
+                - /home/ubuntu/prime-square
+                - /home/ubuntu/rollback
+
+
+      - name: check-stop-be-service
+        jobs:
+          - name: stop-service
+            tasks:
+              - sudo: systemctl restart apache2.service
+              - sudo: systemctl status apache2.service
