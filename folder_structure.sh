@@ -11,8 +11,7 @@ check_and_create_folder() {
 
   if [ ! -d "$folder_path" ]; then
     mkdir "$folder_path"
-    chmod 755 "$folder_path"
-    echo "Created folder '$folder_path' with permissions 755"
+    echo "Created folder '$folder_path'"
   else
     echo "Folder '$folder_path' already exists"
   fi
@@ -21,8 +20,8 @@ check_and_create_folder() {
 # Check and create the "archive" folder
 check_and_create_folder "$archive_folder"
 
-# Check and create the "prime-square" folder
+# Check and create the "prime-square" folders
 check_and_create_folder "$primesquare_folder"
 
-# Check and create the "rollback" folder
+#Check and Create the "Roll-back" folder
 check_and_create_folder "$rollback_folder"
