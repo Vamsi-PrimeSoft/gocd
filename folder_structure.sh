@@ -11,7 +11,7 @@ check_and_create_folder() {
 
   if [ ! -d "$folder_path" ]; then
     mkdir "$folder_path"
-    chown ubuntu:ubuntu "$folder_path"
+    sudo chown ubuntu:ubuntu "$folder_path"
     echo "Created folder '$folder_path' and set ownership to 'ubuntu:ubuntu'"
   else
     echo "Folder '$folder_path' already exists"
