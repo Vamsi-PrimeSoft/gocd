@@ -25,6 +25,8 @@ pipelines:
           jobs:
             setup-and-test:
               timeout: 0
+              resources:
+               - ubuntu-agent
               tasks:
                 - exec:
                     command: /bin/bash
