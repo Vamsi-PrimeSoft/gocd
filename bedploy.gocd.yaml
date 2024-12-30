@@ -1,12 +1,15 @@
+---
 pipelines:
-  - name: BE-CD-YAML
-    group: defaultGroup
-    label_template: "${COUNT}"
+  - name: TestPipeline
+    group: TestGroup
     materials:
       - git:
           url: https://github.com/Vamsi-PrimeSoft/gocd.git
           branch: main
     stages:
-      - name: environment-connectivity-test
+      - name: simple-stage
         jobs:
-          - name: connectivity-test
+          - name: simple-job
+            tasks:
+              - bash:
+                  command: echo "Hello, GoCD!"
