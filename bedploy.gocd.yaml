@@ -6,43 +6,20 @@ pipelines:
         url: https://github.com/Vamsi-PrimeSoft/gocd.git
         branch: main
     stages:
-      - name: environment-connectivity-test
+      - name: setup-and-connectivity-test
         jobs:
-          run-commands:
-          - name: connectivity-test
-            resources:
-              - jfrog
-            tasks:
-              - exec:
-                  command: cat
-                  arguments:
-                    - /etc/os-release
-              - exec:
-                  command: hostname
-      - name: folder-setup
-        jobs:
-          run-commands:
-          - name: create-folders
+          - name: setup-and-test
             resources:
               - ubuntu-agent
             tasks:
               - exec:
-                  command: mkdir
+                  command: bash
                   arguments:
-                    - -p
-                    - /home/ubuntu/archive
-              - exec:
-                  command: chown
-                  arguments:
-                    - ubuntu:ubuntu
-                    - /home/ubuntu/archive
-              - exec:
-                  command: mkdir
-                  arguments:
-                    - -p
-                    - /home/ubuntu/prime-square
-              - exec:
-                  command: chown
-                  arguments:
-                    - ubuntu:ubuntu
-                    - /home/ubuntu/prime-square
+                    - -c
+                    - |
+                      # Connectivity Tests
+                      cat /etc/os-release && \
+                      hostname && \
+                      # Folder Setup
+                      mkdir -p /home/ubuntu/archive /home/ubuntu/prime-square && \
+                      chown ubuntu:ubuntu /home/ubuntu/archive /home/ubuntu/prime-square
