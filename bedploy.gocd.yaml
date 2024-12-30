@@ -1,4 +1,3 @@
----
 format_version: 10
 pipelines:
   BE-CD-YAML:
@@ -15,26 +14,25 @@ pipelines:
         branch: main
         encrypted_password: AES:CvqRgCac0f8DmOI58hCnLA==:lMJcCvSj3nsKR5i/qjAJUA==
     stages:
-      - setup-and-connectivity-test:
-          fetch_materials: true
-          keep_artifacts: false
-          clean_workspace: false
-          approval:
-            type: manual
-            allow_only_on_success: false
-          jobs:
-            setup-and-test:
-              timeout: 0
-              resources:
-               - ubuntu-agent
-              tasks:
-                - exec:
-                    command: /bin/bash
-                    arguments:
-                      - -c
-                      - |
-                        cat /etc/os-release && \ hostname && \ mkdir -p
-                        /home/ubuntu/archive /home/ubuntu/prime-square && \
-                        chown ubuntu:ubuntu /home/ubuntu/archive
-                        /home/ubuntu/prime-square
-                    run_if: passed
+      - name: setup-and-connectivity-test
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: manual
+        jobs:
+          - name: setup-and-test
+            timeout: 0
+            resources:
+              - ubuntu-agent
+            tasks:
+              - exec:
+                  command: /bin/bash
+                  arguments:
+                    - -c
+                    - |
+                      cat /etc/os-release
+                      hostname
+                      mkdir -p /home/ubuntu/archive /home/ubuntu/prime-square
+                      chown ubuntu:ubuntu /home/ubuntu/archive /home/ubuntu/prime-square
+                  run_if: passed
