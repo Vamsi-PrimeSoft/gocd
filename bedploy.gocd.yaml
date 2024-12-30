@@ -1,4 +1,3 @@
----
 pipelines:
   - name: BE-CD-YAML
     group: defaultGroup
