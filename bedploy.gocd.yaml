@@ -29,12 +29,23 @@ pipelines:
                - ubuntu-agent
               tasks:
                 - exec:
+                    command: mkdir
                     arguments:
-                      - -c
-                      - |
-                        cat /etc/os-release
-                        hostname
-                        mkdir -p /home/ubuntu/archive /home/ubuntu/prime-square
-                        chown ubuntu:ubuntu /home/ubuntu/archive /home/ubuntu/prime-square
-                    command: sudo
+                      - -p
+                      - /home/ubuntu/archive
+                - exec:
+                    command: chown
+                    arguments:
+                      - ubuntu:ubuntu
+                      - /home/ubuntu/archive
+                - exec:
+                    command: mkdir
+                    arguments:
+                      - -p
+                      - /home/ubuntu/prime-square
+                - exec:
+                    command: chown
+                    arguments:
+                      - ubuntu:ubuntu
+                      - /home/ubuntu/prime-square
                     run_if: passed
