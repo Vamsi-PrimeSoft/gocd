@@ -1,60 +1,46 @@
-# ci.gocd.yaml
-format_version: 9
-
 pipelines:
   BE-CD-YAML:
     group: defaultGroup
-    label_template: "${COUNT}"
     materials:
       git:
         url: https://github.com/Vamsi-PrimeSoft/gocd.git
         branch: main
     stages:
-      - environment-connectivity-test:
-          jobs:
-            connectivity-test:
-              resources:
-                - jfrog
-              tasks:
-                - exec: # Execute bash command
-                    command: cat
-                    arguments:
-                      - /etc/os-release
-                - exec: # Execute bash command
-                    command: hostname
-      - folder-setup:
-          jobs:
-            create-folders:
-              resources:
-                - ubuntu-agent
-              tasks:
-                - exec: # Ensure folder creation using bash
-                    command: mkdir
-                    arguments:
-                      - -p
-                      - /home/ubuntu/archive
-                - exec:
-                    command: chown
-                    arguments:
-                      - ubuntu:ubuntu
-                      - /home/ubuntu/archive
-                - exec:
-                    command: mkdir
-                    arguments:
-                      - -p
-                      - /home/ubuntu/prime-square
-                - exec:
-                    command: chown
-                    arguments:
-                      - ubuntu:ubuntu
-                      - /home/ubuntu/prime-square
-                - exec:
-                    command: mkdir
-                    arguments:
-                      - -p
-                      - /home/ubuntu/rollback
-                - exec:
-                    command: chown
-                    arguments:
-                      - ubuntu:ubuntu
-                      - /home/ubuntu/rollback
+      - name: environment-connectivity-test
+        jobs:
+          - name: connectivity-test
+            resources:
+              - jfrog
+            tasks:
+              - exec:
+                  command: cat
+                  arguments:
+                    - /etc/os-release
+              - exec:
+                  command: hostname
+      - name: folder-setup
+        jobs:
+          - name: create-folders
+            resources:
+              - ubuntu-agent
+            tasks:
+              - exec:
+                  command: mkdir
+                  arguments:
+                    - -p
+                    - /home/ubuntu/archive
+              - exec:
+                  command: chown
+                  arguments:
+                    - ubuntu:ubuntu
+                    - /home/ubuntu/archive
+              - exec:
+                  command: mkdir
+                  arguments:
+                    - -p
+                    - /home/ubuntu/prime-square
+              - exec:
+                  command: chown
+                  arguments:
+                    - ubuntu:ubuntu
+                    - /home/ubuntu/prime-square
