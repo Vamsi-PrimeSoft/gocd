@@ -34,8 +34,9 @@ pipelines:
                       - -p
                       - /home/ubuntu/archive
                 - exec:
-                    command: chown
+                    command: sudo
                     arguments:
+                      - chown
                       - ubuntu:ubuntu
                       - /home/ubuntu/archive
                 - exec:
@@ -44,8 +45,9 @@ pipelines:
                       - -p
                       - /home/ubuntu/prime-square
                 - exec:
-                    command: chown
+                    command: sudo
                     arguments:
+                      - chown
                       - ubuntu:ubuntu
                       - /home/ubuntu/prime-square
-                    run_if: passed
+                  run_if: passed
