@@ -1,5 +1,6 @@
+---
 pipelines:
- BE-CD-YAML:
+  - name: BE-CD-YAML
     group: defaultGroup
     label_template: ${COUNT}
     materials:
