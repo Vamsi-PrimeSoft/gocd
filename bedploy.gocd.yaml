@@ -14,13 +14,11 @@ pipelines:
               - ubuntu-agent
             tasks:
               - exec:
-                  command: bash
+                  command: /bin/bash
                   arguments:
                     - -c
-                    - |
-                      # Connectivity Tests
+                    - >
                       cat /etc/os-release && \
                       hostname && \
-                      # Folder Setup
                       mkdir -p /home/ubuntu/archive /home/ubuntu/prime-square && \
                       chown ubuntu:ubuntu /home/ubuntu/archive /home/ubuntu/prime-square
