@@ -18,6 +18,7 @@ pipelines:
         approval:
           type: success
         jobs:
+          run-commands:
           - name: setup-and-test
             resources:
               - ubuntu-agent
