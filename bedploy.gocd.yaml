@@ -12,14 +12,12 @@ pipelines:
         branch: main
     stages:
       - name: setup-and-connectivity-test
-      fetch_materials: true
-      keep_artifacts: false
-      clean_workspace: false
-      approval:
-        type: success
-        allow_only_on_success: false
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
         jobs:
-          run-commands:
           - name: setup-and-test
             resources:
               - ubuntu-agent
