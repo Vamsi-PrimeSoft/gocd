@@ -2,7 +2,7 @@
 pipelines:
   - name: BE-CD-YAML
     group: defaultGroup
-    label_template: ${COUNT}
+    label_template: "${COUNT}"
     materials:
       - git:
           url: https://github.com/Vamsi-PrimeSoft/gocd.git
