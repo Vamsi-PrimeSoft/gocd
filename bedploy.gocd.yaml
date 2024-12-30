@@ -29,7 +29,6 @@ pipelines:
                - ubuntu-agent
               tasks:
                 - exec:
-                    command: sudo
                     arguments:
                       - -c
                       - |
@@ -37,4 +36,5 @@ pipelines:
                         hostname
                         mkdir -p /home/ubuntu/archive /home/ubuntu/prime-square
                         chown ubuntu:ubuntu /home/ubuntu/archive /home/ubuntu/prime-square
+                    command: sudo
                     run_if: passed
