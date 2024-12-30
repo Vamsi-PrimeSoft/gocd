@@ -8,6 +8,7 @@ pipelines:
     stages:
       - name: setup-and-connectivity-test
         jobs:
+          run-commands:
           - name: setup-and-test
             resources:
               - ubuntu-agent
