@@ -10,10 +10,3 @@ pipelines:
       - name: environment-connectivity-test
         jobs:
           - name: connectivity-test
-            resources:
-              - jfrog
-            tasks:
-              - bash:
-                  command: cat /etc/os-release
-              - bash:
-                  command: hostname
