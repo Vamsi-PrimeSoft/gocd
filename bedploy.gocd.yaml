@@ -8,6 +8,7 @@ pipelines:
     stages:
       - name: environment-connectivity-test
         jobs:
+          run-commands:
           - name: connectivity-test
             resources:
               - jfrog
@@ -20,6 +21,7 @@ pipelines:
                   command: hostname
       - name: folder-setup
         jobs:
+          run-commands:
           - name: create-folders
             resources:
               - ubuntu-agent
