@@ -17,24 +17,3 @@ pipelines:
                   command: cat /etc/os-release
               - bash:
                   command: hostname
-      - name: folder-setup
-        jobs:
-          - name: create-folders
-            resources:
-              - ubuntu-agent
-            tasks:
-              - file:
-                  path: /home/ubuntu/archive
-                  state: directory
-                  owner: ubuntu
-                  group: ubuntu
-              - file:
-                  path: /home/ubuntu/prime-square
-                  state: directory
-                  owner: ubuntu
-                  group: ubuntu
-              - file:
-                  path: /home/ubuntu/rollback
-                  state: directory
-                  owner: ubuntu
-                  group: ubuntu
