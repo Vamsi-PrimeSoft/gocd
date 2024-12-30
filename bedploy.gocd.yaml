@@ -11,25 +11,25 @@ pipelines:
         auto_update: true
         branch: main
     stages:
-      - name: setup-and-connectivity-test
-        fetch_materials: true
-        keep_artifacts: false
-        clean_workspace: false
-        approval:
-          type: success
-        jobs:
-          run-commands:
-          - name: setup-and-test
-            resources:
-              - ubuntu-agent
-            timeout: 0
-            tasks:
-              - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - >
-                      cat /etc/os-release && \
-                      hostname && \
-                      mkdir -p /home/ubuntu/archive /home/ubuntu/prime-square && \
-                      chown ubuntu:ubuntu /home/ubuntu/archive /home/ubuntu/prime-square
+      - setup-and-connectivity-test:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+          jobs:
+            run-commands:
+            - name: setup-and-test
+              resources:
+                - ubuntu-agent
+              timeout: 0
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - >
+                        cat /etc/os-release && \
+                        hostname && \
+                        mkdir -p /home/ubuntu/archive /home/ubuntu/prime-square && \
+                        chown ubuntu:ubuntu /home/ubuntu/archive /home/ubuntu/prime-square
