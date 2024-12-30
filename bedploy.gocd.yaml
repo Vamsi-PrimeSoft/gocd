@@ -33,8 +33,8 @@ pipelines:
                     arguments:
                       - -c
                       - |
-                        cat /etc/os-release && \ hostname && \ mkdir -p
-                        /home/ubuntu/archive /home/ubuntu/prime-square && \
-                        chown ubuntu:ubuntu /home/ubuntu/archive
-                        /home/ubuntu/prime-square
+                        cat /etc/os-release && \
+                        hostname && \
+                        mkdir -p /home/ubuntu/archive /home/ubuntu/prime-square && \
+                        chown ubuntu:ubuntu /home/ubuntu/archive /home/ubuntu/prime-square
                     run_if: passed
