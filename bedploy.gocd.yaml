@@ -11,14 +11,18 @@ pipelines:
       - name: environment-connectivity-test
         jobs:
           - name: connectivity-test
-            resources: jfrog
+            resources:
+              - jfrog
             tasks:
-              - bash: cat /etc/os-release
-              - bash: hostname
+              - bash:
+                  command: cat /etc/os-release
+              - bash:
+                  command: hostname
       - name: folder-setup
         jobs:
           - name: create-folders
-            resources: ubuntu-agent
+            resources:
+              - ubuntu-agent
             tasks:
               - file:
                   path: /home/ubuntu/archive
