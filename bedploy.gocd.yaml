@@ -57,8 +57,10 @@
                         - restart
                         - apache2.service
                   - exec:
-                      command: /bin/bash
+                      command: scp
                       arguments:
-                        - -c
-                        - scp -v /home/ubuntu/*.zip ubuntu@192.168.56.126:/home/ubuntu/
+                        - i
+                        - /home/ubuntu/test.key
+                        - /home/ubuntu/*.zip
+                        - ubuntu@192.168.56.126:/home/ubuntu
                     run_if: passed
