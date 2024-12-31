@@ -60,7 +60,7 @@
                       command: scp
                       arguments:
                         - i
-                        - /home/ubuntu/test.key
+                        - /home/ubuntu/test2.key
                         - /home/ubuntu/*.zip
                         - ubuntu@192.168.56.126:/home/ubuntu
                     run_if: passed
