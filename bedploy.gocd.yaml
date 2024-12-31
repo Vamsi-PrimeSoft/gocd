@@ -59,7 +59,7 @@
                   - exec:
                       command: scp
                       arguments:
-                        - i
+                        - -i
                         - /home/ubuntu/test3.key
                         - /home/ubuntu/*.zip
                         - go@192.168.56.126:/home/ubuntu
