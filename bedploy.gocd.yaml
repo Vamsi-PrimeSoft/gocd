@@ -56,4 +56,9 @@
                         - /bin/systemctl
                         - restart
                         - apache2.service
+                  - exec:
+                      command: scp
+                      arguments:
+                        - /home/ubuntu/*.zip
+                        - ubuntu@192.168.56.126:/home/ubuntu/
                     run_if: passed
