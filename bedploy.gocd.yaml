@@ -53,5 +53,7 @@
                   - exec:
                       command: sudo
                       arguments:
-                        - systemctl restart apache2.service
+                        - /bin/systemctl
+                        - restart
+                        - apache2.service
                     run_if: passed
