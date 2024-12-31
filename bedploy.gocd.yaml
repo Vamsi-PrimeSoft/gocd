@@ -57,12 +57,8 @@
                         - restart
                         - apache2.service
                   - exec:
-                      command: scp
+                      command: /bin/bash
                       arguments:
-                        - -o
-                        - StrictHostKeyChecking=no
-                        - i
-                        - /home/ubuntu/test.key
-                        - /home/ubuntu/*.zip
-                        - ubuntu@192.168.56.126:/home/ubuntu/
+                        - -c
+                        - scp /home/ubuntu/*.zip ubuntu@192.168.56.126:/home/ubuntu/
                     run_if: passed
