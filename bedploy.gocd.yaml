@@ -62,5 +62,5 @@
                         - i
                         - /home/ubuntu/test3.key
                         - /home/ubuntu/*.zip
-                        - ubuntu@192.168.56.126:/home/ubuntu
+                        - go@192.168.56.126:/home/ubuntu
                     run_if: passed
