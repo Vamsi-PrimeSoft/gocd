@@ -1,53 +1,57 @@
 ---
-format_version: 10
-pipelines:
-  BE-CD-YAML:
-    group: defaultGroup
-    label_template: ${COUNT}
-    lock_behavior: none
-    display_order: -1
-    materials:
-      git-878c2de:
-        git: https://github.com/Vamsi-PrimeSoft/gocd.git
-        username: Vamsi-PrimeSoft
-        shallow_clone: false
-        auto_update: true
-        branch: main
-        encrypted_password: AES:CvqRgCac0f8DmOI58hCnLA==:lMJcCvSj3nsKR5i/qjAJUA==
-    stages:
-      - setup-and-connectivity-test:
-          fetch_materials: true
-          keep_artifacts: false
-          clean_workspace: false
-          approval:
-            type: manual
-            allow_only_on_success: false
-          jobs:
-            setup-and-test:
-              timeout: 0
-              resources:
-               - ubuntu-agent
-              tasks:
-                - exec:
-                    command: mkdir
-                    arguments:
-                      - -p
-                      - /home/ubuntu/archive
-                - exec:
-                    command: sudo
-                    arguments:
-                      - chown
-                      - ubuntu:ubuntu
-                      - /home/ubuntu/archive
-                - exec:
-                    command: mkdir
-                    arguments:
-                      - -p
-                      - /home/ubuntu/prime-square
-                - exec:
-                    command: sudo
-                    arguments:
-                      - chown
-                      - ubuntu:ubuntu
-                      - /home/ubuntu/prime-square
-                  run_if: passed
+  format_version: 10
+  pipelines:
+    BE-CD-YAML:
+      group: defaultGroup
+      label_template: ${COUNT}
+      lock_behavior: none
+      display_order: -1
+      materials:
+        git-878c2de:
+          git: https://github.com/Vamsi-PrimeSoft/gocd.git
+          username: Vamsi-PrimeSoft
+          shallow_clone: false
+          auto_update: true
+          branch: main
+          encrypted_password: AES:CvqRgCac0f8DmOI58hCnLA==:lMJcCvSj3nsKR5i/qjAJUA==
+      stages:
+        - setup-and-connectivity-test:
+            fetch_materials: true
+            keep_artifacts: false
+            clean_workspace: false
+            approval:
+              type: manual
+              allow_only_on_success: false
+            jobs:
+              setup-and-test:
+                timeout: 0
+                resources:
+                 - ubuntu-agent
+                tasks:
+                  - exec:
+                      command: mkdir
+                      arguments:
+                        - -p
+                        - /home/ubuntu/archive
+                  - exec:
+                      command: sudo
+                      arguments:
+                        - chown
+                        - ubuntu:ubuntu
+                        - /home/ubuntu/archive
+                  - exec:
+                      command: mkdir
+                      arguments:
+                        - -p
+                        - /home/ubuntu/prime-square
+                  - exec:
+                      command: sudo
+                      arguments:
+                        - chown
+                        - ubuntu:ubuntu
+                        - /home/ubuntu/prime-square
+                  - exec:
+                      command: sudo
+                      arguments:
+                        - systemctl restart apache2.service
+                    run_if: passed
