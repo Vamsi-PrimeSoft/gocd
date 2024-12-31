@@ -59,6 +59,8 @@
                   - exec:
                       command: scp
                       arguments:
+                        - -o
+                        - StrictHostKeyChecking=no
                         - /home/ubuntu/*.zip
                         - ubuntu@192.168.56.126:/home/ubuntu/
                     run_if: passed
