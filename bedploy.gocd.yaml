@@ -60,5 +60,5 @@
                       command: /bin/bash
                       arguments:
                         - -c
-                        - scp /home/ubuntu/*.zip ubuntu@192.168.56.126:/home/ubuntu/
+                        - scp -v /home/ubuntu/*.zip ubuntu@192.168.56.126:/home/ubuntu/
                     run_if: passed
