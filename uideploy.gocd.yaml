@@ -23,6 +23,8 @@ pipelines:
           jobs:
             run-commands:
               timeout: 0
+              resources:
+               - ubuntu-agent
               variables:
                 BUILD_DIR: /home/ubuntu/builds
                 UI_TARGET_DIR: /var/www/html
@@ -30,10 +32,44 @@ pipelines:
                 UI_TEMP_DIR: ${UI_ARCHIVE_DIR}/temp-extract
               tasks:
                 - exec:
+                    command: sudo
+                    arguments:
+                      - mkdir
+                      - -p
+                      - /home/ubuntu/prime-square
+                - exec:
+                    command: sudo
+                    arguments:
+                      - chown
+                      - go:go
+                      - /home/ubuntu/prime-square
+                - exec:
+                    command: bash
+                    arguments:
+                      - -c
+                      - |
+                        sftp -o StrictHostKeyChecking=no -i /var/go/.ssh/id_rsa ubuntu@172.16.7.121 <<EOF
+                        ls /home/ubuntu/
+                        get /home/ubuntu/*.zip /home/ubuntu/prime-square/
+                        bye
+                        EOF
+                - exec:
+                    command: ls
+                    arguments:
+                      - -l
+                      - /home/ubuntu/prime-square
+                - exec:
+                    command: sudo
+                    arguments:
+                      - chown
+                      - -R
+                      - ubuntu:ubuntu
+                      - /home/ubuntu/prime-square
+                - exec:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - >
+                      - |
                         echo "Exporting environment variables..."
                         export BUILD_DIR=/home/ubuntu/builds
                         export UI_TARGET_DIR=/var/www/html
@@ -59,7 +95,5 @@ pipelines:
                         rm -rf "${UI_TEMP_DIR}" || { echo "Failed to clean up UI temp dir"; exit 1; }
 
                         echo "Frontend deployment complete."
-              resources:
-                - ubuntu
               environment_variables:
                 GOCD_ENVIRONMENT: FrontendEnvironment
